@@ -33,12 +33,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Broken Web Map</title>
-    
-    <!-- Leaflet CSS stylesheet -->
+    <title>A Working Web Map</title>
+
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- start of our CSS styles -->
+
     <style>
         h1 {
             color: black;
@@ -48,35 +47,26 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- Header at the top of the page -->
     <div class="header">
         <h1>A Working Web Map</h1>
     </div>
-    
-    <div id="map" style="width: 600px; height: 400px;"></div>
-    
-    <!-- start of our JavaScript code -->
-    <script>
-        // Initialize the map
-        <div id="mapElement"></div>
-<!-- BUG FIX 1:
-     Problem: L.map('mapElement') referenced an ID that didn't exist.
-     Tool used: Console showed "Map container not found" error.
-     Fix: Changed 'mapElement' to 'map' so it matches the div ID.
--->
 
-        // Center the map on UMD campus, and set the zoom level
-        map.setView([-92.08, 46.82], 15);
-        
-        // Add OpenStreetMap tiles
-        const tiles = L.tileLayer('https://tile.openstreetmap.orgg/{z}/{x}/{y}.png', {
+    <div id="map" class="map" style="width: 600px; height: 400px;"></div>
+
+    <!-- Leaflet JS (must load first) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Your map code -->
+    <script>
+        let map = L.map('map');
+        map.setView([46.82, -92.08], 15);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            attribution: '&copy; OpenStreetMap'
         }).addTo(map);
     </script>
-        
-    <!-- Leaflet JavaScript library -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>
