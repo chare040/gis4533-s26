@@ -43,9 +43,9 @@
         h1 {
             color: black;
         }
-
-        <div id="map" class="map"></div>
-
+        .map {
+            border: 4px solid red;
+        }
     </style>
 </head>
 <body>
@@ -57,24 +57,26 @@
     <div id="map" style="width: 600px; height: 400px;"></div>
     
     <!-- start of our JavaScript code -->
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // Initialize the map
         <div id="mapElement"></div>
+<!-- BUG FIX 1:
+     Problem: L.map('mapElement') referenced an ID that didn't exist.
+     Tool used: Console showed "Map container not found" error.
+     Fix: Changed 'mapElement' to 'map' so it matches the div ID.
+-->
 
         // Center the map on UMD campus, and set the zoom level
-        map.setView([46.82, -92.08], 15);
-
+        map.setView([-92.08, 46.82], 15);
         
         // Add OpenStreetMap tiles
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-   		maxZoom: 19,
-   		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);
+        const tiles = L.tileLayer('https://tile.openstreetmap.orgg/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
     </script>
         
     <!-- Leaflet JavaScript library -->
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>
