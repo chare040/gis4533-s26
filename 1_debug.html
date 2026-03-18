@@ -37,14 +37,32 @@
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- BUG FIX 1:
+     Problem: L.map('mapElement') referenced an ID that didn't exist.
+     Tool used: Console showed "Map container not found" error.
+     Fix: Changed 'mapElement' to 'map' so it matches the div ID.
+-->
+
 
     <style>
         h1 {
             color: black;
         }
+        /* BUG FIX 5:
+   Problem: h1 text was white on a white background, so the title was invisible.
+   Tool used: Elements tab showed the applied CSS color.
+   Fix: Changed h1 color to black so the title is visible.
+*/
+
         .map {
             border: 4px solid red;
         }
+        <!-- BUG FIX 6:
+     Problem: CSS targeted .map class, but the div used id="map" with no class.
+     Tool used: Elements tab showed no border style applied.
+     Fix: Added class="map" to the map div so the red border appears.
+-->
+
     </style>
 </head>
 
@@ -59,14 +77,30 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- Your map code -->
+    <!-- BUG FIX 4:
+     Problem: My script ran before Leaflet loaded, so 'L' was undefined.
+     Tool used: Console showed "L is not defined".
+     Fix: Moved the Leaflet script tag above my JavaScript code.
+-->
+
     <script>
         let map = L.map('map');
         map.setView([46.82, -92.08], 15);
+        // BUG FIX 2:
+// Problem: Coordinates were reversed (Leaflet expects [lat, lng]).
+// Tool used: Visual inspection + map centering looked wrong.
+// Fix: Swapped to [46.82, -92.08] to correctly center on UMD.
+
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; OpenStreetMap'
         }).addTo(map);
+        // BUG FIX 3:
+// Problem: Tile URL misspelled as "openstreetmap.orgg", causing 404 errors.
+// Tool used: Network tab showed failed tile requests.
+// Fix: Corrected URL to "openstreetmap.org".
+
     </script>
 </body>
 </html>
