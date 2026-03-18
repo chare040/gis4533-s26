@@ -1,0 +1,106 @@
+<!-- 
+    Assignment 1: Find and Fix the Bugs
+    This web map has 6 bugs in it. Your job is to find and fix them using the browser's Developer Tools.
+
+    To open Developer Tools press F12, or right-click the page and select "Inspect".
+
+    You will need to use:
+        - The Console tab: shows JavaScript errors with line numbers and descriptions.
+        - The Elements tab: shows the actual HTML structure of the page as the browser sees it. 
+          You can also see the CSS styles applied to any element here.
+        - (Optional) The Network tab: shows all files and resources the page tried to load.
+
+    When the map is working correctly, you should see:
+        1. A title ("A Working Web Map") and subtitle visible at the top of the page
+        2. A map with a red border around it showing the the UMD campus
+        3. A basemap using OpenStreetMap tiles (not a blank grey box)
+
+    Tips:
+        - Fix the bugs one at a time. After each fix, save the file, refresh the page, and check the console again.
+        - Read the error messages carefully — they usually tell you exactly what's wrong and on which line.
+        - If something looks wrong visually but there's no console error, try using the Elements tab to inspect the element.
+
+    For each bug that you find and fix, leave a comment in the code describing:
+        - What was the problem?
+        - What tool helped you find it?
+        - How did you fix it?
+        
+    AI use: you can ask questions of AI (such as "I'm getting this error (paste in error)" or "why isn't the title on this page showing up?") 
+    Use it to make sense of and understand the code. But make the actual fixes yourself. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Working Web Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- BUG FIX 1:
+     Problem: L.map('mapElement') referenced an ID that didn't exist.
+     Tool used: Console showed "Map container not found" error.
+     Fix: Changed 'mapElement' to 'map' so it matches the div ID.
+-->
+
+
+    <style>
+        h1 {
+            color: black;
+        }
+        /* BUG FIX 5:
+   Problem: h1 text was white on a white background, so the title was invisible.
+   Tool used: Elements tab showed the applied CSS color.
+   Fix: Changed h1 color to black so the title is visible.
+*/
+
+        .map {
+            border: 4px solid red;
+        }
+        <!-- BUG FIX 6:
+     Problem: CSS targeted .map class, but the div used id="map" with no class.
+     Tool used: Elements tab showed no border style applied.
+     Fix: Added class="map" to the map div so the red border appears.
+-->
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>A Working Web Map</h1>
+    </div>
+
+    <div id="map" class="map" style="width: 600px; height: 400px;"></div>
+
+    <!-- Leaflet JS (must load first) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Your map code -->
+    <!-- BUG FIX 4:
+     Problem: My script ran before Leaflet loaded, so 'L' was undefined.
+     Tool used: Console showed "L is not defined".
+     Fix: Moved the Leaflet script tag above my JavaScript code.
+-->
+
+    <script>
+        let map = L.map('map');
+        map.setView([46.82, -92.08], 15);
+        // BUG FIX 2:
+// Problem: Coordinates were reversed (Leaflet expects [lat, lng]).
+// Tool used: Visual inspection + map centering looked wrong.
+// Fix: Swapped to [46.82, -92.08] to correctly center on UMD.
+
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
+        // BUG FIX 3:
+// Problem: Tile URL misspelled as "openstreetmap.orgg", causing 404 errors.
+// Tool used: Network tab showed failed tile requests.
+// Fix: Corrected URL to "openstreetmap.org".
+
+    </script>
+</body>
+</html>
