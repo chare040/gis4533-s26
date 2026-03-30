@@ -29,7 +29,16 @@
     <!-- Leaflet CSS stylesheet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <style></style>
+    <style>
+		body{
+			width: 100%;
+			height: 80%;
+		}
+		#map {
+			width: 600%;
+			height: 400%;
+		}
+	</style>
 </head>
 <body>
     <!-- Header at the top of the page -->
@@ -37,7 +46,7 @@
         <h1>A Mostly Basic Web Map</h1>
         <h3>by: Your Name Here</h3>
     </div>
-    <div id="map" style="width: 600px; height: 400px;"></div>
+    <div id="map"></div>
     
     <!-- Leaflet JavaScript library -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -47,12 +56,10 @@
         const map = L.map('map').setView([46.82, -92.08], 13);
 
         // Add OpenStreetMap tiles
-        const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}', {
-	minZoom: 0,
-	maxZoom: 20,
-	attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>'
-	ext: 'jpg'
-	});
+        var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
         // Add a marker for the UMD campus
         const marker = L.marker([46.82, -92.085]).addTo(map);
         marker.bindPopup("<b>University of Minnesota Duluth</b><br>A great place to learn about GIS!").openPopup();
