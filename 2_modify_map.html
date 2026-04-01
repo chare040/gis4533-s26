@@ -30,10 +30,54 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
-		#map {
-			width: 600px;
-			height: 400px;
-		}
+		/* Page background + font */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
+.header {
+    background: #003f5c;
+    color: turquoise;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 4px solid #2f4b7c;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.header h3 {
+    margin: 5px 0 15px 0;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+/* Paragraph styling */
+.header p {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    padding: 0 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #e6e6e6;
+}
+
+/* Map styling */
+#map {
+    width: 80%;
+    height: 500px;
+    margin: 20px auto;
+    border: 3px solid #2f4b7c;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
 	</style>
 </head>
 <body>
