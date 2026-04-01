@@ -63,6 +63,16 @@
     
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        const duluth_school_attendance_areas = {
+           "type": "FeatureCollection",
+           "features": [
+              ...your features...
+           ]
+        };
+    </script>
+
     
     <script>
         // Initialize the map, center it on UMD campus, and set the zoom level
@@ -73,6 +83,20 @@
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+
+        // ------------------------------------------------------------
+        // Load the GeoJSON of Duluth school attendance areas
+        // (This variable must match the name you used when pasting your file)
+        // ------------------------------------------------------------
+        const attendanceLayer = L.geoJSON(duluth_school_attendance_areas).addTo(map);
+
+        // ------------------------------------------------------------
+        // Add attribution for the data source
+        // ------------------------------------------------------------
+        map.attributionControl.addAttribution(
+            "Attendance Areas © Minnesota Department of Education"
+        );
+
     </script>
 </body>
 </html>
