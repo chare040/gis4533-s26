@@ -68,13 +68,20 @@
     L.marker([46.7814, -92.1020]).addTo(map)
       .bindPopup("<b>Marcus Duluth Cinema</b><br>Fun fact: It is one of the only theaters in the region with full recliner seating.");
 
-    // Aerial Lift Bridge (with image)
-    L.marker([46.7785, -92.0933]).addTo(map)
-      .bindPopup(`
-          <b>Aerial Lift Bridge</b><br>
-          Fun fact: The bridge rises about 25 times per day during summer!<br>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Duluth_aerial_lift_bridge.jpg" width="180">
-      `);
+    // Aerial Lift Bridge (with video)
+   L.marker([46.7785, -92.0933]).addTo(map)
+  .bindPopup(`
+      <b>Aerial Lift Bridge</b><br>
+      Fun fact: The bridge rises about 25 times per day during summer!<br><br>
+      <iframe width="220" height="140"
+          src="https://www.youtube.com/embed/8ZKqCwH0L2M"
+          title="Aerial Lift Bridge Video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+      </iframe>
+  `);
+
 </script>
 
 </body>
