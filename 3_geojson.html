@@ -110,7 +110,9 @@
         // Load the GeoJSON of Duluth school attendance areas
         // (This variable must match the name you used when pasting your file)
         // ------------------------------------------------------------
-        const attendanceLayer = L.geoJSON(duluth_school_attendance_areas).addTo(map);
+        const attendanceLayer = L.geoJSON(duluth_school_attendance_areas, {
+            style: style
+        }).addTo(map);
 
         // ------------------------------------------------------------
         // Add attribution for the data source
