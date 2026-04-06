@@ -136,9 +136,14 @@
         // ------------------------------------------------------------
         // STEP 3: Load GeoJSON data
         // ------------------------------------------------------------
-        const duluth_school_attendance_areas = {
-            /* your full GeoJSON goes here */
-        };
+        const attendanceLayer = L.geoJSON(duluth_school_attendance_areas).addTo(map);
+
+        // ------------------------------------------------------------
+        // Add attribution for the data source
+        // ------------------------------------------------------------
+        map.attributionControl.addAttribution(
+            "Attendance Areas © Minnesota Department of Education"
+        );
 
         // ------------------------------------------------------------
         // STEP 4: Styling function (random pastel colors)
