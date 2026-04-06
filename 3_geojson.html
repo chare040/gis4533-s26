@@ -51,14 +51,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Most Basic Web Map</title>
-    
+    <title>Duluth School Attendance Areas</title>
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
+
     <style>
         /* ---------------------------
-           STEP 5: PAGE LAYOUT + STYLE
+           PAGE LAYOUT + STYLE
            --------------------------- */
 
         body {
@@ -99,82 +99,82 @@
 </head>
 
 <body>
+
+    <!-- ---------------------------
+         HEADER LAYOUT
+         --------------------------- -->
     <header>
         <h1>Duluth Public School Attendance Areas</h1>
         <h2>A Thematic Map of Elementary, Middle, and High School Boundaries</h2>
     </header>
-    <div id="map" style="width: 600px; height: 400px;"></div>
-    
+
+    <!-- Map container -->
+    <div id="map"></div>
+
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    
     <script>
-        // Initialize the map, center it on UMD campus, and set the zoom level
-        const map = L.map('map').setView([46.82, -92.08], 13);
-
-        // Add OpenStreetMap tiles
-        const tiles = L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    {
-        maxZoom: 19,
-        attribution:
-            '&copy; CARTO | Attendance Areas © Minnesota Department of Education'
-        }
-        ).addTo(map);
-
-
-        const duluth_school_attendance_areas = {
-            "type":"FeatureCollection", "features": [
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.07778818125168,46.79804473536542],[-92.03654480332504,46.821348234390236],[-92.05371872754395,46.83826174173528],[-92.06866553460038,46.84189472741776],[-92.07510048923747,46.83671887722861],[-92.09062685646933,46.815026944986286],[-92.07778818125168,46.79804473536542]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"CONGDON","ELEM_MULTI":"N","MIDD_NAME":"ORDEAN EAST","MIDD_MULTI":"N","HIGH_NAME":"EAST","HIGH_MULTI":"N","Shape_Leng":15324.2186986,"Shape_Area":9771636.76116}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.17478565178476,46.83655733071954],[-92.1085270052853,46.82904153102828],[-92.07510048923747,46.83671887722861],[-92.06866553460038,46.84189472741776],[-92.04225429336944,47.1983482588076],[-92.17478565178476,46.83655733071954]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"HOMECROFT","ELEM_MULTI":"N","MIDD_NAME":"ORDEAN EAST","MIDD_MULTI":"N","HIGH_NAME":"EAST","HIGH_MULTI":"N","Shape_Leng":124676.654312,"Shape_Area":369218661.49}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.05371872754395,46.83826174173528],[-91.92082744242451,46.916587078138825],[-92.04225429336944,47.1983482588076],[-92.06866553460038,46.84189472741776],[-92.05371872754395,46.83826174173528]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"LAKEWOOD","ELEM_MULTI":"N","MIDD_NAME":"ORDEAN EAST","MIDD_MULTI":"N","HIGH_NAME":"EAST","HIGH_MULTI":"N","Shape_Leng":104547.864101,"Shape_Area":363132005.899}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.03654480332504,46.821348234390236],[-91.92082744242451,46.916587078138825],[-92.05371872754395,46.83826174173528],[-92.03654480332504,46.821348234390236]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"LESTER PARK","ELEM_MULTI":"N","MIDD_NAME":"ORDEAN EAST","MIDD_MULTI":"N","HIGH_NAME":"EAST","HIGH_MULTI":"N","Shape_Leng":35738.7071282,"Shape_Area":31352569.7578}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.1085270052853,46.82904153102828],[-92.17478565178476,46.83655733071954],[-92.17477222491543,46.81483144451382],[-92.13620011323448,46.78653960184176],[-92.10042644364867,46.81454079899588],[-92.1085270052853,46.82904153102828]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"LOWELL","ELEM_MULTI":"N","MIDD_NAME":"LINCOLN PARK","MIDD_MULTI":"N","HIGH_NAME":"DENFELD","HIGH_MULTI":"N","Shape_Leng":21633.9613669,"Shape_Area":22565557.2259}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.09062685646933,46.815026944986286],[-92.07510048923747,46.83671887722861],[-92.1085270052853,46.82904153102828],[-92.10042644364867,46.81454079899588],[-92.09062685646933,46.815026944986286]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"LOWELL","ELEM_MULTI":"N","MIDD_NAME":"ORDEAN EAST","MIDD_MULTI":"N","HIGH_NAME":"EAST","HIGH_MULTI":"N","Shape_Leng":8947.49191248,"Shape_Area":5043447.98566}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.20008799944102,46.733239267645246],[-92.16934090257284,46.71986153903464],[-92.1252216271415,46.745270704361744],[-92.17472327471374,46.76413300863212],[-92.20008799944102,46.733239267645246]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"LAURA MACARTHUR","ELEM_MULTI":"N","MIDD_NAME":"LINCOLN PARK","MIDD_MULTI":"N","HIGH_NAME":"DENFELD","HIGH_MULTI":"N","Shape_Leng":18195.6560782,"Shape_Area":17469107.0902}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.08985112472095,46.79218989520307],[-92.10042644364867,46.81454079899588],[-92.13620011323448,46.78653960184176],[-92.09000305875378,46.74952645156518],[-92.08985112472095,46.79218989520307]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"MYERS-WILKINS","ELEM_MULTI":"N","MIDD_NAME":"LINCOLN PARK","MIDD_MULTI":"N","HIGH_NAME":"DENFELD","HIGH_MULTI":"N","Shape_Leng":35611.1969724,"Shape_Area":18356748.5457}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.08985112472095,46.79218989520307],[-92.07778818125168,46.79804473536542],[-92.09062685646933,46.815026944986286],[-92.10042644364867,46.81454079899588],[-92.08985112472095,46.79218989520307]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"MYERS-WILKINS","ELEM_MULTI":"N","MIDD_NAME":"ORDEAN EAST","MIDD_MULTI":"N","HIGH_NAME":"EAST","HIGH_MULTI":"N","Shape_Leng":8142.75111712,"Shape_Area":2738142.65708}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.13620011323448,46.78653960184176],[-92.17477222491543,46.81483144451382],[-92.17472327471374,46.76413300863212],[-92.1252216271415,46.745270704361744],[-92.09000305875378,46.74952645156518],[-92.13620011323448,46.78653960184176]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"PIEDMONT","ELEM_MULTI":"N","MIDD_NAME":"LINCOLN PARK","MIDD_MULTI":"N","HIGH_NAME":"DENFELD","HIGH_MULTI":"N","Shape_Leng":24460.2992751,"Shape_Area":20521747.5032}},
-            {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.20008799944102,46.733239267645246],[-92.21629492027,46.649867458737596],[-92.16934090257284,46.71986153903464],[-92.20008799944102,46.733239267645246]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"STOWE","ELEM_MULTI":"N","MIDD_NAME":"LINCOLN PARK","MIDD_MULTI":"N","HIGH_NAME":"DENFELD","HIGH_MULTI":"N","Shape_Leng":40085.3177323,"Shape_Area":39347841.8999}}
-            ]};
-
+        // ------------------------------------------------------------
+        // STEP 1: Initialize the map
+        // ------------------------------------------------------------
+        const map = L.map('map');
 
         // ------------------------------------------------------------
-// STEP 3: Add custom styling to the attendance areas
-// ------------------------------------------------------------
+        // STEP 2: Add a subdued basemap (figure-ground)
+        // ------------------------------------------------------------
+        const tiles = L.tileLayer(
+            'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+            {
+                maxZoom: 19,
+                attribution:
+                    '&copy; CARTO | Attendance Areas © Minnesota Department of Education'
+            }
+        ).addTo(map);
 
-// Random pastel color generator
-function getRandomColor() {
-    const r = Math.floor((Math.random() * 127) + 127);
-    const g = Math.floor((Math.random() * 127) + 127);
-    const b = Math.floor((Math.random() * 127) + 127);
-    return `rgb(${r}, ${g}, ${b})`;
-}
+        // ------------------------------------------------------------
+        // STEP 3: Load GeoJSON data
+        // ------------------------------------------------------------
+        const duluth_school_attendance_areas = {
+            /* your full GeoJSON goes here */
+        };
 
-// Style function for polygons
-function style(feature) {
-    return {
-        fillColor: getRandomColor(),
-        weight: 2,
-        opacity: 1,
-        color: "#555",      // lighter outline
-        fillOpacity: 0.6
-    };
-}
-     // STEP 4: Popups
-function onEachFeature(feature, layer) {
-    const props = feature.properties;
+        // ------------------------------------------------------------
+        // STEP 4: Styling function (random pastel colors)
+        // ------------------------------------------------------------
+        function getRandomColor() {
+            const r = Math.floor((Math.random() * 127) + 127);
+            const g = Math.floor((Math.random() * 127) + 127);
+            const b = Math.floor((Math.random() * 127) + 127);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
 
-    const popupHTML = `
-        <h3>${props.ELEM_NAME} Attendance Area</h3>
-        <p><strong>Elementary School:</strong> ${props.ELEM_NAME}</p>
-        <p><strong>Middle School:</strong> ${props.MIDD_NAME}</p>
-        <p><strong>High School:</strong> ${props.HIGH_NAME}</p>
-    `;
+        function style(feature) {
+            return {
+                fillColor: getRandomColor(),
+                weight: 2,
+                opacity: 1,
+                color: "#555",
+                fillOpacity: 0.6
+            };
+        }
 
-    layer.bindPopup(popupHTML);
-}   
+        // ------------------------------------------------------------
+        // STEP 5: Popups for each attendance area
+        // ------------------------------------------------------------
+        function onEachFeature(feature, layer) {
+            const props = feature.properties;
+
+            const popupHTML = `
+                <h3>${props.ELEM_NAME} Attendance Area</h3>
+                <p><strong>Elementary School:</strong> ${props.ELEM_NAME}</p>
+                <p><strong>Middle School:</strong> ${props.MIDD_NAME}</p>
+                <p><strong>High School:</strong> ${props.HIGH_NAME}</p>
+            `;
+
+            layer.bindPopup(popupHTML);
+        }
+
         // ------------------------------------------------------------
         // STEP 6: Add GeoJSON layer with styling + popups
         // ------------------------------------------------------------
@@ -183,20 +183,11 @@ function onEachFeature(feature, layer) {
             onEachFeature: onEachFeature
         }).addTo(map);
 
-// ------------------------------------------------------------
-// STEP 6: Fit map to show all attendance areas
-// ------------------------------------------------------------
-map.fitBounds(attendanceLayer.getBounds());
-
-
-
         // ------------------------------------------------------------
-        // Add attribution for the data source
+        // STEP 7: Fit map to show all attendance areas
         // ------------------------------------------------------------
-        map.attributionControl.addAttribution(
-            "Attendance Areas © Minnesota Department of Education"
-        );
-
+        map.fitBounds(attendanceLayer.getBounds());
     </script>
+
 </body>
 </html>
