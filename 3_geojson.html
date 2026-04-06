@@ -114,11 +114,15 @@
 
     
     <script>
-        // Initialize the map, center it on UMD campus, and set the zoom level
+        // ------------------------------------------------------------
+        // STEP 1: Initialize the map
+        // ------------------------------------------------------------
         const map = L.map('map').setView([46.82, -92.08], 13);
 
-        // Add OpenStreetMap tiles
-       const tiles = L.tileLayer(
+        // ------------------------------------------------------------
+        // STEP 2: Add a subdued basemap (figure-ground)
+        // ------------------------------------------------------------
+        L.tileLayer(
             'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
             {
                 maxZoom: 19,
@@ -128,6 +132,9 @@
         ).addTo(map);
 
 
+        // ------------------------------------------------------------
+        // STEP 3: Load GeoJSON data
+        // ------------------------------------------------------------
         const duluth_school_attendance_areas = {
             "type":"FeatureCollection", "features": [
             {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[-92.07778818125168,46.79804473536542],[-92.03654480332504,46.821348234390236],[-92.05371872754395,46.83826174173528],[-92.06866553460038,46.84189472741776],[-92.07510048923747,46.83671887722861],[-92.09062685646933,46.815026944986286],[-92.07778818125168,46.79804473536542]]]},"properties":{"SDORGID":10709000000,"SDTYPE":"01","SDNUMBER":"0709","SDPREFNAME":"Duluth Public School District","ELEM_NAME":"CONGDON","ELEM_MULTI":"N","MIDD_NAME":"ORDEAN EAST","MIDD_MULTI":"N","HIGH_NAME":"EAST","HIGH_MULTI":"N","Shape_Leng":15324.2186986,"Shape_Area":9771636.76116}},
@@ -145,7 +152,7 @@
 
 
         // ------------------------------------------------------------
-// STEP 3: Add custom styling to the attendance areas
+// STEP 4: Add custom styling to the attendance areas
 // ------------------------------------------------------------
 
 // Random pastel color generator
@@ -166,7 +173,7 @@ function style(feature) {
         fillOpacity: 0.6
     };
 }
-     // STEP 4: Popups
+     // STEP 5: Popups
 function onEachFeature(feature, layer) {
     const props = feature.properties;
 
@@ -180,7 +187,7 @@ function onEachFeature(feature, layer) {
     layer.bindPopup(popupHTML);
 }   
         // ------------------------------------------------------------
-        // Load the GeoJSON of Duluth school attendance areas
+        //STEP 6: Load the GeoJSON of Duluth school attendance areas
         // (This variable must match the name you used when pasting your file)
         // ------------------------------------------------------------
         const attendanceLayer = L.geoJSON(duluth_school_attendance_areas, {
@@ -188,7 +195,7 @@ function onEachFeature(feature, layer) {
             onEachFeature: onEachFeature
         }).addTo(map);
 
-        // Fit map to show all attendance areas
+        // STEP 7: Fit map to show all attendance areas
         map.fitBounds(attendanceLayer.getBounds());
 
 
