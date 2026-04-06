@@ -113,7 +113,19 @@ function style(feature) {
         fillOpacity: 0.6
     };
 }
-        
+     // STEP 4: Popups
+function onEachFeature(feature, layer) {
+    const props = feature.properties;
+
+    const popupHTML = `
+        <h3>${props.ELEM_NAME} Attendance Area</h3>
+        <p><strong>Elementary School:</strong> ${props.ELEM_NAME}</p>
+        <p><strong>Middle School:</strong> ${props.MIDD_NAME}</p>
+        <p><strong>High School:</strong> ${props.HIGH_NAME}</p>
+    `;
+
+    layer.bindPopup(popupHTML);
+}   
         // ------------------------------------------------------------
         // Load the GeoJSON of Duluth school attendance areas
         // (This variable must match the name you used when pasting your file)
